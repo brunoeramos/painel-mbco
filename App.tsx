@@ -31,8 +31,10 @@ export default function App() {
 
   const [tab, setTab]               = useState("tracking");
   const [lojasAtivas, setLojasAtivas] = useState<string[]>(["GRUPO"]);
-  const [dataIni, setDataIni]       = useState("");
-  const [dataFim, setDataFim]       = useState("");
+  const [dataIni, setDataIniRaw] = useState(() => localStorage.getItem("mbco_dataIni") ?? "");
+  const setDataIni = (v: string) => { setDataIniRaw(v); localStorage.setItem("mbco_dataIni", v); };
+  const [dataFim, setDataFimRaw] = useState(() => localStorage.getItem("mbco_dataFim") ?? "");
+  const setDataFim = (v: string) => { setDataFimRaw(v); localStorage.setItem("mbco_dataFim", v); };
 
   const { qData, qStatus, qTs, refreshQuality }            = useQualityData();
   const { trackingData, trackingStatus, refreshTracking }  = useTrackingData();

@@ -93,7 +93,8 @@ export function QualidadeView({ qData, qStatus, qTs, refreshQuality, lojasAtivas
                   <div style={{ textAlign: "center" }}>
                     <div style={{ fontSize: 11, color: P.textoSuave, fontWeight: 600, marginBottom: 4 }}>NOTA PLATAFORMA</div>
                     <div style={{ fontSize: 36, fontWeight: 900, color: d.estatico ? light(d.estatico * 20, 80, 90, P) : P.textoSuave }}>{d.estatico ? d.estatico.toFixed(1) : "-"}</div>
-                    <div style={{ fontSize: 9, color: P.textoSuave }}>nota atual no Google/Trip</div>
+                    {/* ✅ Texto correto por plataforma */}
+                    <div style={{ fontSize: 9, color: P.textoSuave }}>{titulo === "Google" ? "nota atual do Google" : "nota atual do TripAdvisor"}</div>
                   </div>
                 </div>
                 <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 8, marginBottom: 14 }}>
@@ -111,7 +112,7 @@ export function QualidadeView({ qData, qStatus, qTs, refreshQuality, lojasAtivas
                   </div>
                 </div>
                 {d.starsPeriodo && d.starsPeriodo.length === 5 && (
-                  <RatingBars data={[4,3,2,1,0].map((i) => ({ semana: d.starsPeriodo[i] || 0, mes: d.starsMes ? (d.starsMes[i] || 0) : 0 }))} P={P} />
+                  <RatingBars data={[0,1,2,3,4].map((i) => ({ semana: d.starsPeriodo[i] || 0, mes: d.starsMes ? (d.starsMes[i] || 0) : 0 }))} P={P} />
                 )}
               </Card>
             ))}

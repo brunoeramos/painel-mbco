@@ -1,6 +1,6 @@
 export const SHEET_ID = "1yiUqplHbOQye19wYsWuJbH0yZQcaEzcPRLyHR_XrrKA";
 export const SHEET_ID_TRACKING = "1tKWJJcIaYvZgmjipqCzDSp8xahcb07hlZnaZ4Hwf-cQ";
-export const REFRESH_MS = 5 * 60 * 1000;
+export const REFRESH_MS = 45 * 60 * 1000;
 
 export const LOJAS_LIST = [
   "GRUPO","1835","IGUATEMI","CAIS ANEXO","CAIS","CAIS TOTAL","PONTAL","BALI HAI","DE RUA","DELIVERY",

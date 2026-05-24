@@ -89,20 +89,25 @@ export function RatingBars({ data, P }: { data: { semana?: number; mes?: number 
   const max = Math.max(...data.map((d) => Math.max(d.semana || 0, d.mes || 0)), 1);
   return (
     <div style={{ display: "flex", flexDirection: "column", gap: 5 }}>
-      {data.map((d, i) => (
-        <div key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
-          <span style={{ fontSize: 11, fontWeight: 700, color: colors[i], minWidth: 16 }}>{i + 1}★</span>
-          <div style={{ flex: 1 }}>
-            <div style={{ height: 5, background: P.fundo, borderRadius: 3, marginBottom: 2, overflow: "hidden" }}>
-              <div style={{ width: `${((d.semana || 0) / max) * 100}%`, height: "100%", background: colors[i], borderRadius: 3 }} />
+      {[...data].reverse().map((d, i) => {
+        const starIndex = data.length - 1 - i; // índice original no array
+        const starLabel = data.length - i;     // 5, 4, 3, 2, 1
+        const color = colors[starIndex];
+        return (
+          <div key={i} style={{ display: "flex", alignItems: "center", gap: 6 }}>
+            <span style={{ fontSize: 11, fontWeight: 700, color, minWidth: 16 }}>{starLabel}★</span>
+            <div style={{ flex: 1 }}>
+              <div style={{ height: 5, background: P.fundo, borderRadius: 3, marginBottom: 2, overflow: "hidden" }}>
+                <div style={{ width: `${((d.semana || 0) / max) * 100}%`, height: "100%", background: color, borderRadius: 3 }} />
+              </div>
+              <div style={{ height: 5, background: P.fundo, borderRadius: 3, overflow: "hidden" }}>
+                <div style={{ width: `${((d.mes || 0) / max) * 100}%`, height: "100%", background: color, opacity: 0.45, borderRadius: 3 }} />
+              </div>
             </div>
-            <div style={{ height: 5, background: P.fundo, borderRadius: 3, overflow: "hidden" }}>
-              <div style={{ width: `${((d.mes || 0) / max) * 100}%`, height: "100%", background: colors[i], opacity: 0.45, borderRadius: 3 }} />
-            </div>
+            <div style={{ fontSize: 10, color: P.textoSuave, minWidth: 28, textAlign: "right" }}>{d.semana || 0}/{d.mes || 0}</div>
           </div>
-          <div style={{ fontSize: 10, color: P.textoSuave, minWidth: 28, textAlign: "right" }}>{d.semana || 0}/{d.mes || 0}</div>
-        </div>
-      ))}
+        );
+      })}
       <div style={{ display: "flex", gap: 12, marginTop: 4 }}>
         {[[P.textoMed, "Semana"],["#CBD5E1","Mês"]].map(([c, l]) => (
           <div key={l} style={{ display: "flex", gap: 4, alignItems: "center" }}>
